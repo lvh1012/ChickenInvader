@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7f0df" />
+    <meta name="description" content="A responsive doodle-art arcade shooter drawn in ballpoint ink." />
+    <title>Doodle Sky Defenders</title>
+  </head>
+  <body>
+    <main id="app" aria-label="Doodle Sky Defenders game">
+      <section id="game-shell" aria-describedby="game-status">
+        <canvas id="game-canvas" width="900" height="1600" aria-label="Game playfield. Drag or use arrow keys to move."></canvas>
+
+        <header id="hud" class="hud" aria-live="polite">
+          <div><span class="hud-label">SCORE</span><strong id="score">000000</strong></div>
+          <div><span class="hud-label">WAVE</span><strong id="wave">01</strong></div>
+          <div><span class="hud-label">INK</span><strong id="weapon">Ⅰ</strong></div>
+          <div id="health-wrap"><span class="hud-label">HULL</span><strong id="health">♥ ♥ ♥</strong></div>
+        </header>
+
+        <div id="boss-hud" class="boss-hud" hidden>
+          <span>THE BIG CLUCK</span><progress id="boss-health" max="100" value="100">100%</progress>
+        </div>
+
+        <section id="menu" class="overlay" aria-labelledby="game-title">
+          <div class="paper-card">
+            <p class="eyebrow">FIELD NOTE № 42</p>
+            <h1 id="game-title">DOODLE SKY<br /><span>DEFENDERS</span></h1>
+            <div class="chicken-mark" aria-hidden="true">𓅪</div>
+            <button id="play-button" class="primary">▶ PLAY</button>
+            <button id="how-button">? HOW TO PLAY</button>
+            <button id="settings-button">⚙ SETTINGS</button>
+            <p class="small-note">Keyboard + touch · Best <span id="best-score">000000</span></p>
+          </div>
+        </section>
+
+        <section id="pause-menu" class="overlay" aria-labelledby="pause-title" hidden>
+          <div class="paper-card compact">
+            <p class="eyebrow">TIME OUT</p>
+            <h2 id="pause-title">PAUSED</h2>
+            <button id="resume-button" class="primary">▶ RESUME</button>
+            <button data-action="restart">↻ RESTART</button>
+            <button data-action="settings">⚙ SETTINGS</button>
+            <button data-action="quit">⌂ MAIN MENU</button>
+          </div>
+        </section>
+
+        <section id="game-over" class="overlay" aria-labelledby="over-title" hidden>
+          <div class="paper-card compact">
+            <p class="eyebrow">FLIGHT REPORT</p>
+            <h2 id="over-title">GAME OVER</h2>
+            <p class="result">SCORE <strong id="final-score">000000</strong></p>
+            <p class="result">BEST <strong id="final-best">000000</strong></p>
+            <button data-action="restart" class="primary">↻ RETRY</button>
+            <button data-action="quit">⌂ MAIN MENU</button>
+          </div>
+        </section>
+
+        <dialog id="info-dialog" aria-labelledby="dialog-title">
+          <form method="dialog" class="paper-card compact">
+            <button class="close" value="close" aria-label="Close dialog">×</button>
+            <h2 id="dialog-title">HOW TO PLAY</h2>
+            <div id="dialog-content"></div>
+            <button value="close" class="primary">GOT IT</button>
+          </form>
+        </dialog>
+
+        <button id="pause-button" class="icon-button" aria-label="Pause game" hidden>Ⅱ</button>
+        <div id="wave-banner" role="status" aria-live="assertive"></div>
+        <div id="game-status" class="sr-only" aria-live="polite">Main menu</div>
+        <output id="debug-overlay" hidden></output>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "doodle-sky-defenders",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "test": "node --experimental-strip-types --test test/*.test.mjs",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "vite": "^7.1.5"
+  }
+}
