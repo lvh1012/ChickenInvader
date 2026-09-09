@@ -6,8 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "test": "node --experimental-strip-types --test test/*.test.mjs",
+    "test": "node --test test/*.test.mjs",
     "preview": "vite preview"
+  },
+  "engines": {
+    "node": ">=22.18"
   },
   "devDependencies": {
     "typescript": "^5.9.2",

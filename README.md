@@ -9,6 +9,8 @@ npm install
 npm run dev
 ```
 
+Node.js 22.18 or newer is required for the native TypeScript test imports.
+
 Production build and tests:
 
 ```bash

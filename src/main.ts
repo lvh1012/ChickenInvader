@@ -21,18 +21,22 @@ const waveBanner = required<HTMLElement>("#wave-banner");
 const bossHud = required<HTMLElement>("#boss-hud");
 const bossHealth = required<HTMLProgressElement>("#boss-health");
 const debugOverlay = required<HTMLOutputElement>("#debug-overlay");
+const scoreLabel = required<HTMLElement>("#score");
+const waveLabel = required<HTMLElement>("#wave");
+const weaponLabel = required<HTMLElement>("#weapon");
+const healthLabel = required<HTMLElement>("#health");
+const healthWrap = required<HTMLElement>("#health-wrap");
 const storage = new SafeStorage();
 let settings = storage.loadSettings();
 let bannerTimer = 0;
 
 const game = new Game(canvas, settings, {
   hud: (score, wave, hp, weapon) => {
-    required<HTMLElement>("#score").textContent = String(score).padStart(6, "0");
-    required<HTMLElement>("#wave").textContent = String(wave).padStart(2, "0");
-    required<HTMLElement>("#weapon").textContent = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ"][weapon - 1] ?? "Ⅳ";
-    const health = required<HTMLElement>("#health");
-    health.textContent = hp > 0 ? `${"♥ ".repeat(hp).trim()}${hp === 1 ? " ⚠" : ""}` : "✕ BREACH";
-    required<HTMLElement>("#health-wrap").classList.toggle("danger", hp <= 1);
+    scoreLabel.textContent = String(score).padStart(6, "0");
+    waveLabel.textContent = String(wave).padStart(2, "0");
+    weaponLabel.textContent = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ"][weapon - 1] ?? "Ⅳ";
+    healthLabel.textContent = hp > 0 ? `${"♥ ".repeat(hp).trim()}${hp === 1 ? " ⚠" : ""}` : "✕ BREACH";
+    healthWrap.classList.toggle("danger", hp <= 1);
   },
   state: (state) => updateState(state),
   boss: (visible, hp, maxHp) => {
@@ -84,7 +88,7 @@ function updateState(stateValue: GameState): void {
   } else if (stateValue === "PAUSED") {
     queueMicrotask(() => required<HTMLButtonElement>("#resume-button").focus());
   } else if (stateValue === "GAME_OVER") {
-    const score = Number.parseInt(required<HTMLElement>("#score").textContent ?? "0", 10);
+    const score = Number.parseInt(scoreLabel.textContent ?? "0", 10);
     storage.saveBestScore(score);
     required<HTMLElement>("#final-score").textContent = String(score).padStart(6, "0");
     required<HTMLElement>("#final-best").textContent = String(storage.getBestScore()).padStart(6, "0");
