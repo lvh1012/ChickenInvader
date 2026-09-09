@@ -56,6 +56,10 @@ export class InputManager {
   };
 
   private onKeyDown = (event: KeyboardEvent): void => {
+    const target = event.target as HTMLElement | null;
+    const inUiControl = Boolean(target?.closest("button, a, input, select, textarea"));
+    const dialogOpen = Boolean(document.querySelector("dialog[open]"));
+    if (inUiControl || (event.code === "Escape" && dialogOpen)) return;
     if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Space"].includes(event.code)) {
       event.preventDefault();
     }

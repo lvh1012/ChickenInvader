@@ -127,9 +127,11 @@ export class Game {
 
   quit(): void {
     this.enemies = [];
+    this.powerUps = [];
     this.playerBullets.clear();
     this.enemyBullets.clear();
     this.particles.clear();
+    this.callbacks.boss(false, 0, 1);
     this.setState("MENU");
   }
 
@@ -217,7 +219,7 @@ export class Game {
         enemy.x += Math.sin(enemy.age * 5 + enemy.phase) * 175 * delta;
         if (enemy.y > WORLD.height + 80) {
           enemy.diving = false;
-          enemy.y = -80;
+          enemy.age = -0.5;
         }
       } else {
         const arrival = clamp((enemy.age + 0.5) / 1.8, 0, 1);
@@ -426,6 +428,7 @@ export class Game {
     this.callbacks.hud(this.score, this.wave, this.player.hp, this.player.weaponLevel);
     if (this.player.hp <= 0) {
       this.enemyBullets.clear();
+      this.callbacks.boss(false, 0, 1);
       this.setState("GAME_OVER");
     }
   }
